@@ -1,3 +1,5 @@
 *.ini
 *.pyc
+*.bat
+*.leo
 __pycache__
