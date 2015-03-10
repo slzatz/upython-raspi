@@ -1,5 +1,6 @@
 import serial
 import sys
+import platform
 from time import sleep
 import config as c
 import boto.sqs
@@ -17,7 +18,7 @@ if sqs_queue.name!='temperature':
     sys.exit()
 
 if platform.machine() == 'armv6l':
-    device = '/dev/ttyAMC0'
+    device = '/dev/ttyACM0'
     machine = 'raspi'
 else:
     device = 'com3'
