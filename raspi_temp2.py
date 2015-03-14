@@ -64,5 +64,5 @@ while True:
     else:
         print("nothing transmitted because for some reason no temp and pressure returned")
 
-    sleep(600)
+    sleep(1200)
 
