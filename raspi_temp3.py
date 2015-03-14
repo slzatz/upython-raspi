@@ -10,14 +10,24 @@ import boto.sqs
 from boto.sqs.message import Message
 
 if platform.machine() == 'armv6l':
+
+    import RPi.GPIO as GPIO
+    PINS = [23,22,27,18] #pins 1 through 4
+    GPIO.setmode(GPIO.BCM)
+    for pin in PINS:
+        GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
     os.putenv('SDL_VIDEODRIVER', 'fbcon')
     os.putenv('SDL_FBDEV', '/dev/fb1')
     os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
     os.putenv('SDL_MOUSEDRV', 'TSLIB')
+
 elif platform.system() == 'Windows':
     os.environ['SDL_VIDEODRIVER'] = 'windib'
+
 elif platform.system() == "Linux":
     os.environ['SDL_VIDEODRIVER'] = 'x11' #note: this works if you launch x (startx) and run terminal requires keyboard/mouse
+
 else:
     sys.exit("Currently unsupported hardware/OS")
 
