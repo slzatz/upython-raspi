@@ -14,7 +14,6 @@ if platform.machine() == 'armv6l':
     os.putenv('SDL_FBDEV', '/dev/fb1')
     os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
     os.putenv('SDL_MOUSEDRV', 'TSLIB')
-    pygame.mouse.set_visible(False)
 elif platform.system() == 'Windows':
     os.environ['SDL_VIDEODRIVER'] = 'windib'
 elif platform.system() == "Linux":
@@ -24,6 +23,9 @@ else:
 
 r = pygame.init()
 print("display initiated:",r)
+
+if platform.machine() == 'armv6l':
+    pygame.mouse.set_visible(False)
 
 w, h = pygame.display.Info().current_w, pygame.display.Info().current_h
 if w > 1000:
