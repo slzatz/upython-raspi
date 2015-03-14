@@ -9,20 +9,18 @@ import config as c
 import boto.sqs
 from boto.sqs.message import Message
 
-if platform.machine() == 'armv6l' and not args.display:
+if platform.machine() == 'armv6l':
     os.putenv('SDL_VIDEODRIVER', 'fbcon')
     os.putenv('SDL_FBDEV', '/dev/fb1')
     os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
     os.putenv('SDL_MOUSEDRV', 'TSLIB')
+    pygame.mouse.set_visible(False)
 elif platform.system() == 'Windows':
     os.environ['SDL_VIDEODRIVER'] = 'windib'
 elif platform.system() == "Linux":
     os.environ['SDL_VIDEODRIVER'] = 'x11' #note: this works if you launch x (startx) and run terminal requires keyboard/mouse
 else:
     sys.exit("Currently unsupported hardware/OS")
-
-if platform.machine() == 'armv6l' and not args.display:
-    pygame.mouse.set_visible(False)
 
 r = pygame.init()
 print("display initiated:",r)
